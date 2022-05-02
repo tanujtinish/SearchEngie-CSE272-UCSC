@@ -12,15 +12,14 @@ How To Run:
 A) Design decisions and high-level software architecture
 
 Tech Stack:
-The language used: java
-Project management tool: maven IDE: Intellij
-Version control: Github
+The language used: java,
+Project management tool: maven,
+IDE: Intellij,
+Version control: Github,
 
 Programming tools or libraries
-Lucene version 9.1.0 ->
-Lucene-core, lucene-analyzers-common, lucene-queryparser
+Lucene version 9.1.0 -> Lucene-core, lucene-analyzers-common, lucene-queryparser
 
-Design decisions and high-level software architecture:
 The program is written following object-oriented principles to make it more manageable and readable. The program is divided into seven packages:
 1. Parsing:
    This package parses query, document, and relevance file. To hold different properties of each query and document, I have created two classes(value objects), namely ParsedDocument and ParsedQuery
