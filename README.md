@@ -1,17 +1,20 @@
 # SearchEngie-CSE272-UCSC
 
 Tanuj Gupta:
-Code: Github
-A) Design decisions and high-level software
-architecture
-Teck Stack
+
+How To Run:
+
+A) Design decisions and high-level software architecture
+
+Tech Stack:
 The language used: java
 Project management tool: maven IDE: Intellij
 Version control: Github
 Programming tools or libraries
 Lucene version 9.1.0 ->
 Lucene-core, lucene-analyzers-common, lucene-queryparser
-Design decisions and high-level software architecture
+
+Design decisions and high-level software architecture:
 The program is written following object-oriented principles to make it more manageable and readable. The program is divided into seven packages:
 1. Parsing:
    This package parses query, document, and relevance file. To hold different properties of each query and document, I have created two classes(value objects), namely ParsedDocument and ParsedQuery
@@ -22,20 +25,20 @@ The program is written following object-oriented principles to make it more mana
    c) LogFileResultRow: to hold a single row of final results in the format defined for logfile
 3. SearchEngine:
    It is the main package which has 3 classes:
-   a) Indexer: This class indexes all the parsed documents in byteBufferIndex (in
-
-RAM). It uses lucenes standard analyzer that removes stop worlds and perform stemming and lemmetization
-b) Reader and Searcher: This class is used to query index created by indexer. In constructor, I also calculate document Frequencuies for all the terms to be used while ranking document using my own algorithm.
+   a) Indexer: This class indexes all the parsed documents in byteBufferIndex (in RAM). It uses lucenes standard analyzer that removes stop worlds and perform stemming and lemmetization
+   b) Reader and Searcher: This class is used to query index created by indexer. In constructor, I also calculate document Frequencuies for all the terms to be used while ranking document using my own algorithm.
 4. Ranking:
    This package defines all the 5 ranking algorithms, namely (Boolean, TF, TF-IDF, Relevance feedback, and Own algorithm)
 5. VoTransformation:
-   This package is used for conversion among different class objects. For instance, function convertParsedDocumentToDocument function inside VoTransformations
-   Class is used to convert my own created ParsedDocument object to lucenes document object.
+   This package is used for conversion among different class objects. For instance, function convertParsedDocumentToDocument function inside VoTransformations. Class is used to convert my own created ParsedDocument object to lucenes document object.
 6. Run:
    This package is used to run everything. It contains main method, where every java program starts. This is what make all the required function calls.
 7. Comparator:
    This package defines comparison functions for objects necessary to be able to sort them.
-   B) Implementation of ranking algorithms:
+
+
+
+B) Implementation of ranking algorithms:
 1. Boolean: Program uses used lucenes booleanSimilarity for Boolean ranking
 2. Tf-Idf: Program uses used lucenes classicSimilarity that implements interface
    TfIDFSimilarity for Boolean Tf-Idf:
@@ -44,15 +47,19 @@ b) Reader and Searcher: This class is used to query index created by indexer. In
 4. Relevance Feedback: For this, I have used Pseudo_Relevance_Feedback. The program first fetches the top 5 documents using lucenes Tf-Idf method. Then the original query is expanded using these 5 documents. This query is then used to fetch the top 50 final documents using lucenes Tf-Idf method.
 
 C) Strengths and weaknesses of your design:
+
 Strengths:
 1. The program uses a well-established Lucene library to build the search engine. It gives a lot of in-built functionalities that we can use to add more enhanced features to the current code.
 2. Java follows an object-oriented pattern, which makes application development very understandable and developer-friendly.
-   Weaknesses:
+
+Weaknesses:
 1. Using Lucene library also comes with a big disadvantage:
    Here the developer has less control over so many aspects. Understanding the internals of Lucene is very difficult and may hinder writing one’s own optimization on so many aspects.
    Lucene also requires a lot of knowledge of its classes to be able to use them.
 2. Java doesn't provide many Machine learning modules and libraries. So, adding machine learning is challenging when using Java. In that case, the combination of python and java seems more suitable, like pylucene.
-   D) Customized new algorithm:
+
+
+D) Customized new algorithm:
 - The algorithm is the combination of pseudo-relevance-feedback, relevance-feedback, and optimized tf-idf
 - It follows these three steps in order:
 1. Relevance-feedback:
@@ -63,22 +70,17 @@ Strengths:
    2.2) Among these five documents, select the ones that are different from the two documents used in the first step.
    2.3) Use these selected documents to further expand the query.
 3. Optimized tf-idf
-
-- Optimized tf-idf uses properties of a query to enhance ranking. Every query in the query file given has three properties, namely, query_number(num), title, and description(desc).
-- Instead of giving equal weightage to every term in a query, Optimized tf-idf gives more weightage to terms in the title, unlike normal tf-idf.
-- To give extra weights to the terms in the title, the algorithm simply multiples constant C with term_frequency to give the term more weight. Value for constant C is decided as below:
+   Optimized tf-idf uses properties of a query to enhance ranking. Every query in the query file given has three properties, namely, query_number(num), title, and description(desc).
+   Instead of giving equal weightage to every term in a query, Optimized tf-idf gives more weightage to terms in the title, unlike normal tf-idf.
+   To give extra weights to the terms in the title, the algorithm simply multiples constant C with term_frequency to give the term more weight. Value for constant C is decided as below:
   a) If the term is present in both the title and description, multiply the term frequency by 3, i.e., constant C=3
   b) If the term is present in the title, multiply the term frequency by 2, i.e, constant C=3
   c) If the term is only present in the description, constant C=1. That is, the term frequency is used as-is.
 
 E) Experimental results: 1. Boolean:
-
 2. Tf:
-
 3. Tf-IDF:
-
 4. Relevance Feedback:
-
 5. Own:
 
 Patterns observed:
@@ -92,7 +94,10 @@ Patterns observed:
   description.
 - The performance of the five algorithms is as follows:
   Own > Relevance feedback > Pseudo relevance feedback > Tf-Idf > Tf > Boolean
-  F) What you have learned from this assignment:
+  
+
+F) What you have learned from this assignment:
+
 1. Implementing search engine:
    a. Learned how to configure a Lucene project in Java
    b. Leaned to create both filesystem and ram index using Lucene
@@ -103,6 +108,7 @@ Patterns observed:
    fetched documents
    f. Learned to update/override Lucene classes to create own ranking
    algorithms
+   
 2. Application development design principles:
    a. Learned to create a maven project in Java.
    b. Learned to use SOLID design principles.
