@@ -15,6 +15,7 @@ Tech Stack:
 The language used: java
 Project management tool: maven IDE: Intellij
 Version control: Github
+
 Programming tools or libraries
 Lucene version 9.1.0 ->
 Lucene-core, lucene-analyzers-common, lucene-queryparser
