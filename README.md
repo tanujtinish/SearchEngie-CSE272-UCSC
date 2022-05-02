@@ -3,6 +3,11 @@
 Tanuj Gupta:
 
 How To Run:
+1. Install Java, Maven
+2. Clone git repo
+3. From root: run following commands
+4. run command: "mvn install". This will compile the project and create jar.
+5. run command: java java -jar target/Run-1.0.jar
 
 A) Design decisions and high-level software architecture
 
